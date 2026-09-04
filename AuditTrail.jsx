@@ -1,0 +1,3 @@
+import { useEffect, useState } from "react";
+function AuditTrail(){const [events,setEvents]=useState([]);useEffect(()=>{try{setEvents(JSON.parse(localStorage.getItem("auditTrail"))||[])}catch{}},[]);return <section className="cart-page"><h1>Agent Audit Trail</h1><p>Every important agent and money action is recorded locally for this demo.</p>{events.length===0?<p>No events yet.</p>:events.map(e=><div className="cart-item" key={e.id}><div><h3>{e.action}</h3><p>{new Date(e.timestamp).toLocaleString()}</p><pre>{JSON.stringify(e.details||{},null,2)}</pre><p>{e.money_action?"💳 Money action":"🤖 Non-money action"} {e.user_confirmation?"• User confirmed":""} {e.outcome?`• ${e.outcome}`:""}</p></div></div>)}</section>}
+export default AuditTrail;
